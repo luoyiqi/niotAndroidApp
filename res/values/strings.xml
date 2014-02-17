@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">niotAndroidApp</string>
+    <string name="app_name">异构标识识别</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+
+    <string name="name_main_activity">物联网异构标识解析</string>
+    <string name="name_setting_activity">设置</string>
+    <string name="name_manual_input_activity">手动输入</string>
+    
+   
+    
+    <string name="code_recognize">编码识别</string>
+    <string name="code_recognize_explain">检测所输入的编码属于何种类型</string>
+    
+    <string name="input_server_address">请输入服务器的地址</string>
+    <string name="hint_input_server_address">例如：192.168.1.1</string>
+    
+    <string name="input_code">请输入要查询的编码</string>
+    <string name="hint_manual_input">例如：1234567</string>
+    
+   	<string name="setting">设置</string>
+   	<string name="exit">退出</string>
+    <string name="modify">修改</string>
+    <string name="request">查询</string>
+    
+    
+    <string name="copyright_information">版权归属:中国互联网络信息中心(CNNIC)</string>
+    
+    
 </resources>
