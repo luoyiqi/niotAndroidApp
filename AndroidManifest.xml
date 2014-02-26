@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.niot.android.main"
+    package="cn.niot.android.activity"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="18" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-        <!-- <activity
+        android:theme="@style/AppTheme" >
+
+        <!--
+        <activity
             android:name="cn.niot.android.main.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -21,63 +22,56 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> -->
+        </activity>
+        -->
         <activity
             android:name=".MipcaActivityCapture"
             android:configChanges="orientation|keyboardHidden"
+            android:label=""
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        
-        <activity
-            android:name="cn.niot.android.activity.DrawActivity"/>
-        
-        
+        <activity android:name="cn.niot.android.activity.DrawActivity" />
         <activity
             android:name="cn.niot.android.activity.MainActivity"
-            android:label="@string/name_main_activity" 
-            android:screenOrientation="portrait">
+            android:label="@string/name_main_activity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="cn.niot.android.activity.SettingActivity"
-            android:label="@string/name_setting_activity" 
+            android:label="@string/name_setting_activity"
             android:parentActivityName="cn.niot.android.activity.MainActivity"
-            android:screenOrientation="portrait">
-            
+            android:screenOrientation="portrait" >
             <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="cn.niot.android.activity.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.niot.android.activity.MainActivity" />
         </activity>
-        
-		<activity
+        <activity
             android:name="cn.niot.android.activity.ManualInputActivity"
-            android:label="@string/name_manual_input_activity" 
+            android:label="@string/name_manual_input_activity"
             android:parentActivityName="cn.niot.android.activity.MainActivity"
-            android:screenOrientation="portrait">
-            
+            android:screenOrientation="portrait" >
             <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="cn.niot.android.activity.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.niot.android.activity.MainActivity" />
         </activity>
-        
-        
-        
+        <activity android:name=".ShowDataActivity" />
+
         <service android:name="cn.niot.android.service.SendHttpRequestService" />
-        
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    
-    
-	<uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

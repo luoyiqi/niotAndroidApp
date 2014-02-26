@@ -5,46 +5,43 @@
     android:layout_marginTop="0dp">
     
 
-    
+   
     <TextView 
-        android:id="@+id/textViewManualInput"
+        android:id="@+id/textViewShowData"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
        	android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/input_code" /> 
-        
-    <EditText 
-        android:id="@+id/editTextManualInput"
-        android:layout_width="fill_parent"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:text="@string/show_data" /> 
+       
+       <!-- 用于 显示查询出数据是一个的情况这时要显示100%的图片并显示出详细信息在showInfo这个TextView中-->  
+    <ImageView 
+         android:id="@+id/showInfoImage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:layout_below="@id/textViewManualInput"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/hint_manual_input"/>
-    
-    <Button
-        android:id="@+id/buttonRequestCodeInfo"
+        android:layout_below="@id/textViewShowData"
+        android:layout_centerHorizontal="true"
+        />
+     <TextView
+        android:id="@+id/showInfo1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextManualInput"
-       	android:background="#AA4630"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:adjustViewBounds="true" 
-        android:text="@string/request" />
+         android:layout_below="@id/showInfoImage"
+         android:textSize="20dp"
+      android:gravity="center_horizontal"
+    
+        /> 
     
    <TextView
         android:id="@+id/showInfo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-         android:layout_below="@id/buttonRequestCodeInfo"
+         android:layout_below="@id/showInfo1"
+         android:gravity="center_horizontal"
         /> 
     <TextView
         android:id="@+id/textViewCopyright"
@@ -54,11 +51,5 @@
         android:gravity="right"
         android:background="#222222"
         android:textColor="#FFFFFF"
-        android:text="@string/copyright_information" />
-    
-    
-    
-    
-    
-    
+        android:text="@string/copyright_information" /> 
 </RelativeLayout>

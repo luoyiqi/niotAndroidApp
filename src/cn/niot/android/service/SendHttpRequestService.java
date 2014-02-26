@@ -19,6 +19,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import cn.niot.android.activity.DrawActivity;
+import cn.niot.android.activity.R;
 import cn.niot.android.utility.ConstantUtil;
 
 
@@ -27,22 +28,26 @@ import android.content.Intent;
 
 public class SendHttpRequestService extends IntentService {
 
-
+private String defaultIP="10.0.2.2";
 
 	public SendHttpRequestService() {
 		super("SendHttpRequestService");
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		String code = intent.getExtras().getString("requestCode");
-		
-		System.out.println(code);
+		String ipString=ConstantUtil.ipStr;
+		System.out.println("ipString"+ipString);
+		if(ipString!=null&&!ipString.equals("")&&!ipString.equals(defaultIP)){
+			defaultIP=ipString;
+		}
 		System.out.println("send httprequest service started");
+		System.out.println("ipdefault==>"+defaultIP);
+		System.out.println("update?==}"+ConstantUtil.ipStr);
 		HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://10.0.2.2:8080/niot/respCode.action");
+		HttpPost httppost = new HttpPost("http://"+defaultIP+":8080/niot/respCode.action");
 	    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(0);
         //nameValuePairs.add(new BasicNameValuePair("code", "00485123456789"));
 	    nameValuePairs.add(new BasicNameValuePair("code", code));
@@ -67,16 +72,10 @@ public class SendHttpRequestService extends IntentService {
 				result = result+newLine;
 				n++;
 			}
-			
-			System.out.println(result);
-			System.out.println(n);
-			
 			Intent intentResult = new Intent();
 			intentResult.setAction(ConstantUtil.ACTION_PROCESS_HTTPRESULT);
 			intentResult.putExtra("result", result);
 			sendBroadcast(intentResult);
-		
-			
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

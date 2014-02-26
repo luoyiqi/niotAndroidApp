@@ -1,4 +1,4 @@
-package cn.niot.android.main;
+package cn.niot.android.activity;
 /**
  * 李慧霞2014.1.22
  */
@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
@@ -27,11 +28,14 @@ import android.widget.Toast;
 import cn.niot.android.camera.CameraManager;
 import cn.niot.android.decoding.CaptureActivityHandler;
 import cn.niot.android.decoding.InactivityTimer;
+import cn.niot.android.service.ProcessResultReceiver;
+import cn.niot.android.service.SendHttpRequestService;
+import cn.niot.android.utility.ConstantUtil;
 import cn.niot.android.view.ViewfinderView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-
+import cn.niot.android.activity.R;
 /**
  * Initial the camera
  * 
@@ -49,7 +53,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	private boolean playBeep;
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
-
+	private ProcessResultReceiver processResultReceiver = null;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -138,12 +142,23 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		} else {
 			Intent resultIntent = new Intent();
 			Bundle bundle = new Bundle();
-			bundle.putString("result", resultString);// 显示条码和二维码的扫描结果，以这种键值对的形式存储
-			bundle.putParcelable("bitmap", barcode);
+			bundle.putString("requestCode", resultString);// 显示条码和二维码的扫描结果，以这种键值对的形式存储
+			//bundle.putString("ipString",getIntent().getExtras().getString("ipString"));
+			//bundle.putParcelable("bitmap", barcode);
 			resultIntent.putExtras(bundle);
-			this.setResult(RESULT_OK, resultIntent);
+			resultIntent.setClass(MipcaActivityCapture.this, SendHttpRequestService.class);
+			startService(resultIntent);
+			
+			//动态注册broadcastReceiver用来接收从SendHttpRequestService发来的数据
+			IntentFilter intentFilterForResult = new IntentFilter();
+			intentFilterForResult.addAction(ConstantUtil.ACTION_PROCESS_HTTPRESULT);
+			processResultReceiver = new ProcessResultReceiver();
+			registerReceiver(processResultReceiver, intentFilterForResult);
+			//注销
+			unregisterReceiver(processResultReceiver);
+			//this.setResult(RESULT_OK, resultIntent);
 		}
-		MipcaActivityCapture.this.finish();
+		//MipcaActivityCapture.this.finish();
 	}
 
 	private void initCamera(SurfaceHolder surfaceHolder) {
@@ -220,7 +235,6 @@ public class MipcaActivityCapture extends Activity implements Callback {
 	}
 
 	private static final long VIBRATE_DURATION = 200L;
-
 	private void playBeepSoundAndVibrate() {
 		if (playBeep && mediaPlayer != null) {
 			mediaPlayer.start();

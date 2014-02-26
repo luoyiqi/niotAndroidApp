@@ -30,8 +30,8 @@ import android.util.Log;
 import cn.niot.android.camera.CameraManager;
 import cn.niot.android.view.ViewfinderResultPointCallback;
 
-import cn.niot.android.main.MipcaActivityCapture;
-import cn.niot.android.main.R;
+import cn.niot.android.activity.MipcaActivityCapture;
+import cn.niot.android.activity.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
