@@ -19,14 +19,14 @@
     <string name="hint_input_server_address">例如：192.168.1.1</string>
     
     <string name="input_code">请输入要查询的编码</string>
+    <string name="show_data">查询结果如下：</string>
     <string name="hint_manual_input">例如：1234567</string>
     
    	<string name="setting">设置</string>
    	<string name="exit">退出</string>
     <string name="modify">修改</string>
     <string name="request">查询</string>
-    
-    
+    <string name="ipset">10.0.2.2</string>
     <string name="copyright_information">版权归属:中国互联网络信息中心(CNNIC)</string>
     
     

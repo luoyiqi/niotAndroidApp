@@ -30,7 +30,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
-import cn.niot.android.main.R;
+import cn.niot.android.activity.R;
 import com.google.zxing.ResultPoint;
 import cn.niot.android.camera.CameraManager;
 

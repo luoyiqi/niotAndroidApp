@@ -27,8 +27,8 @@ import android.util.Log;
 import cn.niot.android.camera.CameraManager;
 import cn.niot.android.camera.PlanarYUVLuminanceSource;
 
-import cn.niot.android.main.MipcaActivityCapture;
-import cn.niot.android.main.R;
+import cn.niot.android.activity.MipcaActivityCapture;
+import cn.niot.android.activity.R;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
