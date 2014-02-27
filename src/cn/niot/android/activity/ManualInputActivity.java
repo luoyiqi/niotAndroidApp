@@ -39,8 +39,7 @@ public class ManualInputActivity extends Activity {
 		edtTxtManualInput = (EditText) findViewById(R.id.editTextManualInput);
 		btnRequestCodeInfo = (Button) findViewById(R.id.buttonRequestCodeInfo);
 		showInfo = (TextView) findViewById(R.id.showInfo);// 显示提示信息
-		btnRequestCodeInfo
-				.setOnClickListener(new btnRequestCodeInfoClickListener());
+		btnRequestCodeInfo.setOnClickListener(new btnRequestCodeInfoClickListener());
 
 	}
 
@@ -81,30 +80,31 @@ public class ManualInputActivity extends Activity {
 
 			// 获得用户输入的编码
 			String requestCode = edtTxtManualInput.getText().toString();
+			
+			//？？？添加判断requestCodes是否为空的语句，如果为空，则toast信息提示用户输入编码，
+			//？？？如果不为空，则启动查询
 
 			// 将该编码发送给SendHttpRequestService，以启动向后台服务器的查询。
 			Intent codeToSend = new Intent();
 			codeToSend.putExtra("requestCode", requestCode);
-//			if (ipString == null) {
-//				codeToSend.putExtra("ipString", getIntent().getExtras()
-//						.getString("ipString"));
-//			} else {
-//				codeToSend.putExtra("ipString", ipString);
-//			}
-			codeToSend.setClass(ManualInputActivity.this,
-					SendHttpRequestService.class);
-			startService(codeToSend);
+			
+
+			//zt注释掉，将发送httprequest查询的操作挪到ProgressBarActivity去进行
+//			codeToSend.setClass(ManualInputActivity.this,
+//			SendHttpRequestService.class);
+//			startService(codeToSend);
 
 			// 动态注册broadcastReceiver用来接收从SendHttpRequestService发来的数据
-			IntentFilter intentFilterForResult = new IntentFilter();
-			intentFilterForResult
-					.addAction(ConstantUtil.ACTION_PROCESS_HTTPRESULT);
-			processResultReceiver = new ProcessResultReceiver();
-			registerReceiver(processResultReceiver, intentFilterForResult);
-			// 注销
-			//unregisterReceiver(processResultReceiver);
+//			IntentFilter intentFilterForResult = new IntentFilter();
+//			intentFilterForResult
+//					.addAction(ConstantUtil.ACTION_PROCESS_HTTPRESULT);
+//			processResultReceiver = new ProcessResultReceiver();
+//			registerReceiver(processResultReceiver, intentFilterForResult);
+			
+			//zt添加，启动ProgressBarActivity进入等待状态；
+			codeToSend.setClass(ManualInputActivity.this,ProgressBarActivity.class);
+			startActivity(codeToSend);
 		}
-
 	}
 
 //	@Override

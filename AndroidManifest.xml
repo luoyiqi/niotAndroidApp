@@ -32,7 +32,18 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <activity android:name="cn.niot.android.activity.DrawActivity" />
+        
+        
+        <activity
+            android:name="cn.niot.android.activity.DrawActivity"
+            android:parentActivityName="cn.niot.android.activity.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.niot.android.activity.MainActivity" />
+        </activity>
+        
+        
         <activity
             android:name="cn.niot.android.activity.MainActivity"
             android:label="@string/name_main_activity"
@@ -52,6 +63,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cn.niot.android.activity.MainActivity" />
         </activity>
+        
         <activity
             android:name="cn.niot.android.activity.ManualInputActivity"
             android:label="@string/name_manual_input_activity"
@@ -61,17 +73,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cn.niot.android.activity.MainActivity" />
         </activity>
-        <activity android:name=".ShowDataActivity" />
-
+        
+        <activity 
+            android:name=".ShowDataActivity" 
+            android:parentActivityName="cn.niot.android.activity.MainActivity">
+           <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.niot.android.activity.MainActivity" />
+        </activity>
+        
+		<activity android:name="cn.niot.android.activity.ProgressBarActivity" />
+		
         <service android:name="cn.niot.android.service.SendHttpRequestService" />
+        
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

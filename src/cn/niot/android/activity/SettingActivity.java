@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import cn.niot.android.activity.R;
 import cn.niot.android.utility.ConstantUtil;
@@ -19,6 +20,7 @@ import cn.niot.android.utility.ConstantUtil;
 public class SettingActivity extends Activity {
 	private EditText editTextServerAddress = null;
 	private Button buttonUpdateServerAddress = null;
+	private TextView textViewCurrentServerAddress = null;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -31,7 +33,18 @@ public class SettingActivity extends Activity {
 
 		editTextServerAddress = (EditText) findViewById(R.id.editTextServerAddress);
 		buttonUpdateServerAddress = (Button) findViewById(R.id.buttonUpdateServerAddress);
-
+		textViewCurrentServerAddress = (TextView) findViewById(R.id.textViewCurrentServerAddress);
+		
+		if(ConstantUtil.ipStr.equals(""))
+		{
+			//用户还没有设置服务器地址时，用默认的服务器地址
+			textViewCurrentServerAddress.setText("用户还没有设置过服务器地址，使用默认的地址："+ConstantUtil.DEFAULT_SERVER_ADDRESS);
+		}
+		else
+		{
+			textViewCurrentServerAddress.setText("当前服务器地址为："+ConstantUtil.ipStr);
+		}
+		
 		// 点击修改按钮
 		buttonUpdateServerAddress.setOnClickListener(new OnClickListener() {
 
@@ -41,14 +54,16 @@ public class SettingActivity extends Activity {
 				String ipString = editTextServerAddress.getText().toString();
 				if (ipString == null || ipString.equals("")) {
 					Toast.makeText(SettingActivity.this, "请输入ip地址",
-							Toast.LENGTH_LONG);
+							Toast.LENGTH_LONG).show();
 				} else {
-					Intent intentIP = new Intent();
-					intentIP.putExtra("ipString", ipString);
+					//Intent intentIP = new Intent();
+					//intentIP.putExtra("ipString", ipString);
 					ConstantUtil.ipStr = ipString;
 					System.out.println(ConstantUtil.ipStr);
-					SettingActivity.this.setResult(RESULT_OK,intentIP);
-					SettingActivity.this.finish();
+					Toast.makeText(SettingActivity.this, "服务器地址更新成功",Toast.LENGTH_SHORT).show();
+					textViewCurrentServerAddress.setText("当前服务器地址为："+ConstantUtil.ipStr);
+					//SettingActivity.this.setResult(RESULT_OK,intentIP);
+					//SettingActivity.this.finish();
 				}
 			}
 		});

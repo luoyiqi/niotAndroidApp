@@ -146,16 +146,22 @@ public class MipcaActivityCapture extends Activity implements Callback {
 			//bundle.putString("ipString",getIntent().getExtras().getString("ipString"));
 			//bundle.putParcelable("bitmap", barcode);
 			resultIntent.putExtras(bundle);
-			resultIntent.setClass(MipcaActivityCapture.this, SendHttpRequestService.class);
-			startService(resultIntent);
+			//zt注释掉
+			//resultIntent.setClass(MipcaActivityCapture.this, SendHttpRequestService.class);
+			//startService(resultIntent);
 			
+			//zt添加，启动ProgressBarActivity进入等待状态；
+			resultIntent.setClass(MipcaActivityCapture.this,ProgressBarActivity.class);
+			startActivity(resultIntent);
+			
+			//以下内容也由zt注释掉
 			//动态注册broadcastReceiver用来接收从SendHttpRequestService发来的数据
-			IntentFilter intentFilterForResult = new IntentFilter();
-			intentFilterForResult.addAction(ConstantUtil.ACTION_PROCESS_HTTPRESULT);
-			processResultReceiver = new ProcessResultReceiver();
-			registerReceiver(processResultReceiver, intentFilterForResult);
-			//注销
-			unregisterReceiver(processResultReceiver);
+//			IntentFilter intentFilterForResult = new IntentFilter();
+//			intentFilterForResult.addAction(ConstantUtil.ACTION_PROCESS_HTTPRESULT);
+//			processResultReceiver = new ProcessResultReceiver();
+//			registerReceiver(processResultReceiver, intentFilterForResult);
+//			//注销
+//			unregisterReceiver(processResultReceiver);
 			//this.setResult(RESULT_OK, resultIntent);
 		}
 		//MipcaActivityCapture.this.finish();

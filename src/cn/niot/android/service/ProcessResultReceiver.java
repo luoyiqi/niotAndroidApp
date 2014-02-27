@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 
 public class ProcessResultReceiver extends BroadcastReceiver {
+	
+	private boolean ifResultReceived = false;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -18,6 +20,7 @@ public class ProcessResultReceiver extends BroadcastReceiver {
 		//从SendHttpRequestService中获得服务器传回的数据，前4位为null，因此需要从第5位开始取值。
 		String result = intent.getExtras().getString("result").substring(4);
 		//取得从服务端获得的标准类型
+		ifResultReceived = true;
 		try {
 			JSONObject obj = new JSONObject(result);
 			int status=obj.getInt("status");
@@ -33,6 +36,14 @@ public class ProcessResultReceiver extends BroadcastReceiver {
 			e.printStackTrace();
 		}
 	}
+
+
+	public boolean isIfResultReceived() {
+		return ifResultReceived;
+	}
+
+
+
 
 
 	//启动一个新的activity用来画饼图

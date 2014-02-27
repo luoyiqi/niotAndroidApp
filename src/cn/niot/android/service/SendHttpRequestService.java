@@ -28,8 +28,8 @@ import android.content.Intent;
 
 public class SendHttpRequestService extends IntentService {
 
-private String defaultIP="10.0.2.2";
-
+	//private String defaultIP="10.0.2.2";
+	private String defaultIP= ConstantUtil.DEFAULT_SERVER_ADDRESS;
 	public SendHttpRequestService() {
 		super("SendHttpRequestService");
 		// TODO Auto-generated constructor stub

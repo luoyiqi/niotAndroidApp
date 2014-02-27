@@ -17,8 +17,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -72,7 +74,7 @@ public class DrawActivity extends Activity {
 				renderer.addSeriesRenderer(r);
 			}
 			RelativeLayout layout = (RelativeLayout) findViewById(R.id.chart);
-			layout.setBackgroundColor(Color.GRAY);
+			layout.setBackgroundColor(Color.WHITE);
 			mchartview = ChartFactory.getPieChartView(this, categorySeries,
 					renderer);
 			setPieView(renderer);
@@ -137,10 +139,32 @@ public class DrawActivity extends Activity {
 		renderer.setChartTitleTextSize(40);
 		renderer.setDisplayValues(true);// 是否显示数据
 		renderer.setClickEnabled(true);// 使得图形可点击
-		// renderer.setLabelsColor(Color.BLUE);// 设置标签的颜色
+		renderer.setLabelsColor(Color.rgb(89, 89, 89));// 设置标签的颜色
 		renderer.setLabelsTextSize(20);
 		renderer.setLegendTextSize(20);
-		renderer.setBackgroundColor(Color.GRAY);
-
+		renderer.setBackgroundColor(Color.WHITE);
+		
 	}
+	
+	//此函数用来定义当用户点击“返回”按钮时，将返回到主页面
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		System.out.println("KEYCODE_BACK pressed");
+        if(keyCode==KeyEvent.KEYCODE_BACK)  
+        {  
+        	System.out.println("KEYCODE_BACK pressed");
+            //do whatever you want the 'Back' button to do  
+            //as an example the 'Back' button is set to start a new Activity named 'NewActivity'  
+        	startActivity(new Intent(DrawActivity.this,MainActivity.class));
+            
+        } 
+        else
+		{
+        	return super.onKeyDown(keyCode, event);
+		}
+        return true;
+	}
+	
+	
 }

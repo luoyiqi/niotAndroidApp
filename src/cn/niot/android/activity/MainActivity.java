@@ -3,8 +3,11 @@ package cn.niot.android.activity;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -110,6 +113,29 @@ public class MainActivity extends Activity {
 			
 	}
 		
+	//此函数用来定义当用户点击“返回”按钮时，结束程序
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		System.out.println("KEYCODE_BACK pressed");
+        if(keyCode==KeyEvent.KEYCODE_BACK)  
+        {  
+        	System.out.println("KEYCODE_BACK pressed");
+            //do whatever you want the 'Back' button to do  
+            //as an example the 'Back' button is set to start a new Activity named 'NewActivity'  
+        	System.exit(0);
+            
+        	//finish();
+        } 
+        else
+		{
+        	return super.onKeyDown(keyCode, event);
+		}
+        return true;
+	}
+	
+	
 //	@Override
 //    protected void onActivityResult(int requestcode, int resultCode, Intent data) {
 //        super.onActivityResult(requestcode, resultCode, data);

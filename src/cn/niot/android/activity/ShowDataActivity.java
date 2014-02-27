@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.niot.android.activity.R;
@@ -56,5 +57,24 @@ private TextView showInfo1=null;
 		e.printStackTrace();
 	}
 	}
+	
+	//此函数用来定义当用户点击“返回”按钮时，将返回到主页面
+		@Override
+		public boolean onKeyDown(int keyCode, KeyEvent event) {
+			// TODO Auto-generated method stub
+			System.out.println("KEYCODE_BACK pressed");
+	        if(keyCode==KeyEvent.KEYCODE_BACK)  
+	        {  
+	        	System.out.println("KEYCODE_BACK pressed");
+	            //do whatever you want the 'Back' button to do  
+	            //as an example the 'Back' button is set to start a new Activity named 'NewActivity'  
+	             startActivity(new Intent(ShowDataActivity.this,MainActivity.class));
+	        } 
+	        else
+			{
+	        	return super.onKeyDown(keyCode, event);
+			}
+	        return true;
+		}
 
 }
