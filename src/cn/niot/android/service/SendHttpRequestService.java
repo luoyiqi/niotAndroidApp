@@ -28,7 +28,7 @@ import android.content.Intent;
 
 public class SendHttpRequestService extends IntentService {
 
-	//private String defaultIP="10.0.2.2";
+
 	private String defaultIP= ConstantUtil.DEFAULT_SERVER_ADDRESS;
 	public SendHttpRequestService() {
 		super("SendHttpRequestService");
@@ -39,13 +39,9 @@ public class SendHttpRequestService extends IntentService {
 		// TODO Auto-generated method stub
 		String code = intent.getExtras().getString("requestCode");
 		String ipString=ConstantUtil.ipStr;
-		System.out.println("ipString"+ipString);
 		if(ipString!=null&&!ipString.equals("")&&!ipString.equals(defaultIP)){
 			defaultIP=ipString;
 		}
-		System.out.println("send httprequest service started");
-		System.out.println("ipdefault==>"+defaultIP);
-		System.out.println("update?==}"+ConstantUtil.ipStr);
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://"+defaultIP+":8080/niot/respCode.action");
 	    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(0);
@@ -84,12 +80,6 @@ public class SendHttpRequestService extends IntentService {
 			e.printStackTrace();
 		}
 		
-		
-		
 	}
-
-
-	
-
 
 }

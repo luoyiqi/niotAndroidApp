@@ -111,24 +111,26 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f080001;
         public static final int app_name=0x7f080000;
-        public static final int code_recognize=0x7f080007;
-        public static final int code_recognize_explain=0x7f080008;
-        public static final int copyright_information=0x7f080013;
-        public static final int exit=0x7f08000f;
+        public static final int code_recognize=0x7f080009;
+        public static final int code_recognize_explain=0x7f08000a;
+        public static final int copyright_information=0x7f080015;
+        public static final int exit=0x7f080011;
         public static final int hello_world=0x7f080002;
-        public static final int hint_input_server_address=0x7f08000a;
-        public static final int hint_manual_input=0x7f08000d;
-        public static final int input_code=0x7f08000b;
-        public static final int input_server_address=0x7f080009;
-        public static final int ipset=0x7f080012;
-        public static final int modify=0x7f080010;
+        public static final int hint_input_server_address=0x7f08000c;
+        public static final int hint_manual_input=0x7f08000f;
+        public static final int input_code=0x7f08000d;
+        public static final int input_server_address=0x7f08000b;
+        public static final int ipset=0x7f080014;
+        public static final int modify=0x7f080012;
         public static final int name_main_activity=0x7f080004;
         public static final int name_manual_input_activity=0x7f080006;
         public static final int name_setting_activity=0x7f080005;
-        public static final int request=0x7f080011;
+        public static final int request=0x7f080013;
         public static final int scan_text=0x7f080003;
-        public static final int setting=0x7f08000e;
-        public static final int show_data=0x7f08000c;
+        public static final int searching=0x7f080007;
+        public static final int setting=0x7f080010;
+        public static final int show_data=0x7f08000e;
+        public static final int showdata_string=0x7f080008;
     }
     public static final class style {
         /** 

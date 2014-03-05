@@ -7,6 +7,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,12 +67,17 @@ public class MainActivity extends Activity {
 			Intent intentToSettingActivity= new Intent();
 			intentToSettingActivity.setClass(MainActivity.this, SettingActivity.class);
 			startActivity(intentToSettingActivity);
-			//startActivityForResult(intentToSettingActivity, 1);
+			
 		}
 		
-		//当点击“退出”时，退出app  !!!尚有问题
+		//当点击“退出”时，彻底退出app，不保留退出前的信息，是彻底性的
 		if(item.getItemId() == R.id.action_exit){
-			System.exit(0);
+			Intent i = new Intent(Intent.ACTION_MAIN);
+      	  i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      	  i.addCategory(Intent.CATEGORY_HOME);
+      	  startActivity(i);
+      	  android.os.Process.killProcess(Process.myPid());
+		
 		}
 		// TODO Auto-generated method stub
 		return super.onOptionsItemSelected(item);
@@ -97,7 +103,6 @@ public class MainActivity extends Activity {
 		}
 		
 	}
-	
 	class iBtnScanInputClickListener implements OnClickListener{
 
 		@Override
@@ -109,11 +114,13 @@ public class MainActivity extends Activity {
 			intent.setClass(MainActivity.this, MipcaActivityCapture.class);
 			//intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
-		}
-			
+		}		
 	}
-		
-	//此函数用来定义当用户点击“返回”按钮时，结束程序
+	/*
+	 * 此函数用来定义当用户点击“返回”按钮时，结束程序,回到桌面，当再次点击应用程序的按钮时仍然
+	 * 会访问到退出之前的设置信息
+	 * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
+	 */
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -121,12 +128,13 @@ public class MainActivity extends Activity {
 		System.out.println("KEYCODE_BACK pressed");
         if(keyCode==KeyEvent.KEYCODE_BACK)  
         {  
-        	System.out.println("KEYCODE_BACK pressed");
+        	System.out.println("MainActivity KEYCODE_BACK pressed");
             //do whatever you want the 'Back' button to do  
             //as an example the 'Back' button is set to start a new Activity named 'NewActivity'  
-        	System.exit(0);
-            
-        	//finish();
+        	  Intent i = new Intent(Intent.ACTION_MAIN);
+        	  i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        	  i.addCategory(Intent.CATEGORY_HOME);
+        	  startActivity(i);	
         } 
         else
 		{
@@ -134,28 +142,9 @@ public class MainActivity extends Activity {
 		}
         return true;
 	}
+
 	
 	
-//	@Override
-//    protected void onActivityResult(int requestcode, int resultCode, Intent data) {
-//        super.onActivityResult(requestcode, resultCode, data);
-//        switch (requestcode) 
-//        {
-//		case SCANNIN_GREQUEST_CODE://用于判断是哪个activity返回的数据
-//			if(resultCode == RESULT_OK)
-//			{
-//				Bundle bundle = data.getExtras();
-//				//显示扫描到的内容，比如一个网址，或者是条码的字符串
-//				//mTextView.setText(bundle.getString("result"));
-//				//显示二维码的图片
-//				//mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
-//				
-//			}
-//			break;
-//		}
-//        Bundle bundle = data.getExtras();
-//        ipString=bundle.getString("ipString");
-//    }	
-//	
+
 	
 }

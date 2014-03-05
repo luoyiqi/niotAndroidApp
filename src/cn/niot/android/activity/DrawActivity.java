@@ -5,7 +5,6 @@ package cn.niot.android.activity;
  * 从json中读取数据画饼图，然后可以先行饼图中扇形的点击（这里的点击比较简单，只是简单的toast显示）
  */
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -16,15 +15,22 @@ import org.achartengine.renderer.SimpleSeriesRenderer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import cn.niot.android.activity.R;
+
+@SuppressLint("NewApi")
 public class DrawActivity extends Activity {
 	private GraphicalView mchartview;
 	private DefaultRenderer renderer;
@@ -32,16 +38,21 @@ public class DrawActivity extends Activity {
 	private JSONObject obj = null;
 	private JSONArray arr = null;
 	private JSONObject extraJson;
-    private int[] colors;
+	private int[] colors;
+
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_draw);
+
+		// 显示action bar上最左侧的回退按钮
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		String codeData = getIntent().getExtras().getString("codeData");
-		System.out.println(codeData);
 		// substring
-		colors = new int[] { Color.RED, Color.rgb(255, 165, 0),
-				Color.YELLOW, Color.GREEN, Color.rgb(0, 255, 255), Color.BLUE,
+		colors = new int[] { Color.RED, Color.rgb(255, 165, 0), Color.YELLOW,
+				Color.GREEN, Color.rgb(0, 255, 255), Color.BLUE,
 				Color.rgb(128, 0, 128) };// 设置扇形的颜色
 		try {
 
@@ -52,10 +63,9 @@ public class DrawActivity extends Activity {
 			for (int i = 0; i < obj.getInt("status"); i++) {
 				// JSONObject extraJson = obj.getJSONObject("extraData");
 				/*
-				 * 这里这个之所以这样写是因为，从服务器哪里得到的数据将每一部分都封装成了字符串，所以没有使用
-				 * 双斜线注释的那部分
+				 * 这里这个之所以这样写是因为，从服务器哪里得到的数据将每一部分都封装成了字符串，所以没有使用 双斜线注释的那部分
 				 */
-				
+
 				extraJson = new JSONObject(obj.getString("extraData"));
 				String codename = arr.getJSONObject(i).getString("codeName");// 得到编码名字
 				JSONObject extrainfo = extraJson.getJSONObject(codename);
@@ -65,10 +75,10 @@ public class DrawActivity extends Activity {
 				categorySeries.add(fullname, probility);
 
 				SimpleSeriesRenderer r = new SimpleSeriesRenderer();
-				//这里这个是NumberFormat的子类，可以格式数据，我设定让扇形中数据显示为00.0%
+				// 这里这个是NumberFormat的子类，可以格式数据，我设定让扇形中数据显示为00.0%
 				DecimalFormat numberformat = new DecimalFormat("00.0%");
 				r.setChartValuesFormat(numberformat);// 设置百分比
-				//设置颜色，这里只有7种颜色值，循环设置
+				// 设置颜色，这里只有7种颜色值，循环设置
 				r.setColor(colors[(i % 7)]);
 				r.setShowLegendItem(true);
 				renderer.addSeriesRenderer(r);
@@ -104,14 +114,14 @@ public class DrawActivity extends Activity {
 									.getString("codeName"));
 							String codenum = extrainfo.getString("codeNum");
 							String fullname = extrainfo.getString("fullName");
-							Toast toast = Toast.makeText(
-									DrawActivity.this,
+							Toast toast = Toast.makeText(DrawActivity.this,
 									fullname + "\n" + "\t\t\t\t" + codenum
 											+ "\n" + "\t\t\t\t比例：\t"
 											+ showformat.format(probility),
 									Toast.LENGTH_LONG);
 							View view = toast.getView();
-							view.setBackgroundColor(colors[seriesSelection.getPointIndex()%7]);
+							view.setBackgroundColor(colors[seriesSelection
+									.getPointIndex() % 7]);// 同步设置toast的颜色使得和扇形的颜色一样
 							toast.setView(view);
 							toast.show();
 
@@ -125,6 +135,7 @@ public class DrawActivity extends Activity {
 
 			});
 			layout.addView(mchartview);
+
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			System.out.println("json处理异常");
@@ -143,28 +154,27 @@ public class DrawActivity extends Activity {
 		renderer.setLabelsTextSize(20);
 		renderer.setLegendTextSize(20);
 		renderer.setBackgroundColor(Color.WHITE);
-		
+
 	}
-	
-	//此函数用来定义当用户点击“返回”按钮时，将返回到主页面
+
+	// 此函数用来定义当用户点击“返回”按钮时，将返回到主页面
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		System.out.println("KEYCODE_BACK pressed");
-        if(keyCode==KeyEvent.KEYCODE_BACK)  
-        {  
-        	System.out.println("KEYCODE_BACK pressed");
-            //do whatever you want the 'Back' button to do  
-            //as an example the 'Back' button is set to start a new Activity named 'NewActivity'  
-        	startActivity(new Intent(DrawActivity.this,MainActivity.class));
-            
-        } 
-        else
-		{
-        	return super.onKeyDown(keyCode, event);
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			System.out.println("KEYCODE_BACK pressed");
+			// do whatever you want the 'Back' button to do
+			// as an example the 'Back' button is set to start a new Activity
+			// named 'NewActivity'
+
+			startActivity(new Intent(DrawActivity.this, MainActivity.class));
+			finish();//这个也必须加上，否则会在点击MainActivity这个界面中的退出键会直接退到这里
+
+		} else {
+			return super.onKeyDown(keyCode, event);
 		}
-        return true;
+		return true;
 	}
-	
-	
+
 }
