@@ -143,8 +143,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 			Intent resultIntent = new Intent();
 			Bundle bundle = new Bundle();
 			bundle.putString("requestCode", resultString);// 显示条码和二维码的扫描结果，以这种键值对的形式存储
-			//bundle.putString("ipString",getIntent().getExtras().getString("ipString"));
-			//bundle.putParcelable("bitmap", barcode);
+			
 			resultIntent.putExtras(bundle);
 			//zt注释掉
 			//resultIntent.setClass(MipcaActivityCapture.this, SendHttpRequestService.class);
@@ -153,7 +152,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 			//zt添加，启动ProgressBarActivity进入等待状态；
 			resultIntent.setClass(MipcaActivityCapture.this,ProgressBarActivity.class);
 			startActivity(resultIntent);
-			
+			finish();//这个也必须加上，否则会在点击MainActivity这个界面中的退出键会直接退到这里
 			//以下内容也由zt注释掉
 			//动态注册broadcastReceiver用来接收从SendHttpRequestService发来的数据
 //			IntentFilter intentFilterForResult = new IntentFilter();

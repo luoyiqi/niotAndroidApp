@@ -13,17 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <!--
-        <activity
-            android:name="cn.niot.android.main.MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        -->
+      
         <activity
             android:name=".MipcaActivityCapture"
             android:configChanges="orientation|keyboardHidden"
@@ -76,14 +66,21 @@
         
         <activity 
             android:name=".ShowDataActivity" 
+            android:label="@string/showdata_string"
             android:parentActivityName="cn.niot.android.activity.MainActivity">
            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cn.niot.android.activity.MainActivity" />
         </activity>
         
-		<activity android:name="cn.niot.android.activity.ProgressBarActivity" />
-		
+		<activity android:name=".ProgressBarActivity" 
+		    android:label="@string/searching"
+		    android:parentActivityName="cn.niot.android.activity.MainActivity">
+		     <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cn.niot.android.activity.MainActivity" />
+		</activity>
+		 
         <service android:name="cn.niot.android.service.SendHttpRequestService" />
         
     </application>

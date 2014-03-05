@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,7 @@ import cn.niot.android.utility.ConstantUtil;
 @SuppressLint("NewApi")
 public class ManualInputActivity extends Activity {
 
-	//private String ipString = null;
+	
 	private EditText edtTxtManualInput = null;
 	private Button btnRequestCodeInfo = null;
 	private ProcessResultReceiver processResultReceiver = null;
@@ -43,34 +44,7 @@ public class ManualInputActivity extends Activity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// 为“选项菜单”添加两个子项，一个为“设置”，另一个为“退出”
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		// 当点击“设置”时，去设置页
-		if (item.getItemId() == R.id.action_settings) {
-			Intent intentToSettingActivity = new Intent();
-			intentToSettingActivity.setClass(this, SettingActivity.class);
-			startActivity(intentToSettingActivity);
-			// startActivityForResult(intentToSettingActivity, 1);
-		}
-
-		// 当点击“退出”时，退出app !!!尚有问题
-		if (item.getItemId() == R.id.action_exit) {
-
-			System.exit(0);
-		}
-		// TODO Auto-generated method stub
-		return super.onOptionsItemSelected(item);
-
-	}
+	
 
 	class btnRequestCodeInfoClickListener implements OnClickListener {
 
@@ -104,22 +78,7 @@ public class ManualInputActivity extends Activity {
 			//zt添加，启动ProgressBarActivity进入等待状态；
 			codeToSend.setClass(ManualInputActivity.this,ProgressBarActivity.class);
 			startActivity(codeToSend);
+			finish();//这个也必须加上，否则会在点击MainActivity这个界面中的退出键会直接退到这里
 		}
 	}
-
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		// TODO Auto-generated method stub
-//		super.onActivityResult(requestCode, resultCode, data);
-//		Bundle bundle = data.getExtras();
-//		ipString = bundle.getString("ipString");
-//	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		showInfo.setText("");
-	}
-
 }
