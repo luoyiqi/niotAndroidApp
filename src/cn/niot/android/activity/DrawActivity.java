@@ -51,7 +51,7 @@ public class DrawActivity extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		String codeData = getIntent().getExtras().getString("codeData");
 		// substring
-		colors = new int[] { Color.RED, Color.rgb(255, 165, 0), Color.YELLOW,
+		colors = new int[] { Color.RED, Color.rgb(255, 165, 0),Color.rgb(231, 226, 0),
 				Color.GREEN, Color.rgb(0, 255, 255), Color.BLUE,
 				Color.rgb(128, 0, 128) };// 设置扇形的颜色
 		try {
@@ -81,9 +81,11 @@ public class DrawActivity extends Activity {
 				// 设置颜色，这里只有7种颜色值，循环设置
 				r.setColor(colors[(i % 7)]);
 				r.setShowLegendItem(true);
+				
 				renderer.addSeriesRenderer(r);
 			}
 			RelativeLayout layout = (RelativeLayout) findViewById(R.id.chart);
+		
 			layout.setBackgroundColor(Color.WHITE);
 			mchartview = ChartFactory.getPieChartView(this, categorySeries,
 					renderer);
@@ -134,6 +136,7 @@ public class DrawActivity extends Activity {
 				}
 
 			});
+
 			layout.addView(mchartview);
 
 		} catch (JSONException e) {
@@ -147,12 +150,12 @@ public class DrawActivity extends Activity {
 	public void setPieView(DefaultRenderer renderer) {
 
 		renderer.setChartTitle("Collison Ratio");
-		renderer.setChartTitleTextSize(40);
+		renderer.setChartTitleTextSize(60);
 		renderer.setDisplayValues(true);// 是否显示数据
 		renderer.setClickEnabled(true);// 使得图形可点击
 		renderer.setLabelsColor(Color.rgb(89, 89, 89));// 设置标签的颜色
 		renderer.setLabelsTextSize(20);
-		renderer.setLegendTextSize(20);
+		renderer.setLegendTextSize(37);
 		renderer.setBackgroundColor(Color.WHITE);
 
 	}

@@ -26,19 +26,24 @@ public final class R {
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int manul_input=0x7f020001;
-        public static final int mm_title_back_btn=0x7f020002;
-        public static final int mm_title_back_focused=0x7f020003;
-        public static final int mm_title_back_normal=0x7f020004;
-        public static final int mm_title_back_pressed=0x7f020005;
-        public static final int mmtitle_bg_alpha=0x7f020006;
-        public static final int qrcode=0x7f020007;
-        public static final int scan_input=0x7f020008;
-        public static final int search=0x7f020009;
-        public static final int showimage=0x7f02000a;
-        public static final int text_height=0x7f02000b;
-        public static final int title=0x7f02000c;
+        public static final int app_icon=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int icon_keyboard=0x7f020002;
+        public static final int icon_result=0x7f020003;
+        public static final int icon_setting=0x7f020004;
+        public static final int icon_wait=0x7f020005;
+        public static final int manul_input=0x7f020006;
+        public static final int mm_title_back_btn=0x7f020007;
+        public static final int mm_title_back_focused=0x7f020008;
+        public static final int mm_title_back_normal=0x7f020009;
+        public static final int mm_title_back_pressed=0x7f02000a;
+        public static final int mmtitle_bg_alpha=0x7f02000b;
+        public static final int qrcode=0x7f02000c;
+        public static final int scan_input=0x7f02000d;
+        public static final int search=0x7f02000e;
+        public static final int showimage=0x7f02000f;
+        public static final int text_height=0x7f020010;
+        public static final int title=0x7f020011;
     }
     public static final class id {
         public static final int about_version_code=0x7f07000e;

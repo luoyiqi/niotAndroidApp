@@ -11,11 +11,13 @@
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
+        android:icon="@drawable/app_icon" 
         android:theme="@style/AppTheme" >
 
       
         <activity
             android:name=".MipcaActivityCapture"
+            android:icon="@drawable/app_icon" 
             android:configChanges="orientation|keyboardHidden"
             android:label=""
             android:screenOrientation="portrait"
@@ -26,6 +28,8 @@
         
         <activity
             android:name="cn.niot.android.activity.DrawActivity"
+            android:icon="@drawable/icon_result" 
+            android:label="@string/showdata_string"
             android:parentActivityName="cn.niot.android.activity.MainActivity"
             android:screenOrientation="portrait" >
             <meta-data
@@ -44,8 +48,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="cn.niot.android.activity.SettingActivity"
+            android:icon="@drawable/icon_setting" 
             android:label="@string/name_setting_activity"
             android:parentActivityName="cn.niot.android.activity.MainActivity"
             android:screenOrientation="portrait" >
@@ -56,6 +62,7 @@
         
         <activity
             android:name="cn.niot.android.activity.ManualInputActivity"
+            android:icon="@drawable/icon_keyboard" 
             android:label="@string/name_manual_input_activity"
             android:parentActivityName="cn.niot.android.activity.MainActivity"
             android:screenOrientation="portrait" >
@@ -66,6 +73,7 @@
         
         <activity 
             android:name=".ShowDataActivity" 
+            android:icon="@drawable/icon_result" 
             android:label="@string/showdata_string"
             android:parentActivityName="cn.niot.android.activity.MainActivity">
            <meta-data
@@ -74,6 +82,7 @@
         </activity>
         
 		<activity android:name=".ProgressBarActivity" 
+		    android:icon="@drawable/icon_wait" 
 		    android:label="@string/searching"
 		    android:parentActivityName="cn.niot.android.activity.MainActivity">
 		     <meta-data

@@ -10,7 +10,7 @@
     <string name="name_setting_activity">设置</string>
     <string name="name_manual_input_activity">手动输入</string>
     <string name="searching">正在查询，请稍后...</string>
-   <string name="showdata_string">结果显示</string>
+   	<string name="showdata_string">结果显示</string>
     
     <string name="code_recognize">编码识别</string>
     <string name="code_recognize_explain">检测所输入的编码属于何种类型</string>

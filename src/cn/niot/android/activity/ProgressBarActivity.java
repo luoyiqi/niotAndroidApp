@@ -70,20 +70,12 @@ public class ProgressBarActivity extends Activity {
 	    handler = new Handler(){
 	        public void handleMessage(Message msg) {  
 	            switch (msg.arg1) {      
-	            case 1:      
-	            	//首先判断是否结果已经被返回
-	            	if(!processResultReceiver.isIfResultReceived())
-	            	{
-		            	System.out.println("time out");
-		            	Toast.makeText(ProgressBarActivity.this, "服务器响应超时，请您重试", Toast.LENGTH_SHORT).show();
-		            	//返回主界面
-		            	startActivity(new Intent(ProgressBarActivity.this,MainActivity.class));
-		            	finish();
-	            	}
-	            	else
-	            	{
-	            	}
-	            	
+	            case 1:
+	            	System.out.println("time out");
+	            	Toast.makeText(ProgressBarActivity.this, "服务器响应超时，请您重试", Toast.LENGTH_SHORT).show();
+	            	//返回主界面
+	            	startActivity(new Intent(ProgressBarActivity.this,MainActivity.class));
+	            	finish();
 	            	break;      
 	            }      
 	            super.handleMessage(msg);  
@@ -113,7 +105,7 @@ public class ProgressBarActivity extends Activity {
 	        	System.out.println("KEYCODE_BACK pressed");
 	            //do whatever you want the 'Back' button to do  
 	            //as an example the 'Back' button is set to start a new Activity named 'NewActivity'  
-	        	timer.cancel();
+	        	//timer.cancel();
 	        	return super.onKeyDown(keyCode, event);
 	        } 
 	        else
@@ -126,6 +118,7 @@ public class ProgressBarActivity extends Activity {
 		protected void onPause() {
 			// TODO Auto-generated method stub
 			super.onPause();
+			timer.cancel();
 			unregisterReceiver(processResultReceiver);
 			finish();//必须有，要不然会在点击MainActivity中的退出时返回到ProcessBarActivity这个界面
 		}
