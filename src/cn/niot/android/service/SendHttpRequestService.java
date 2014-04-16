@@ -18,13 +18,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import cn.niot.android.activity.DrawActivity;
-import cn.niot.android.activity.R;
-import cn.niot.android.utility.ConstantUtil;
-
-
 import android.app.IntentService;
 import android.content.Intent;
+import cn.niot.android.dbhelper.DataFactory;
+import cn.niot.android.utility.ConstantUtil;
 
 public class SendHttpRequestService extends IntentService {
 
@@ -37,16 +34,20 @@ public class SendHttpRequestService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		// TODO Auto-generated method stub
+		//String ipString=ConstantUtil.ipStr;
 		String code = intent.getExtras().getString("requestCode");
-		String ipString=ConstantUtil.ipStr;
+		DataFactory data=new DataFactory(SendHttpRequestService.this);
+		String ipString=data.getIpFromDatabase("ip_string",ConstantUtil.IP_TABALE,SendHttpRequestService.this);
 		if(ipString!=null&&!ipString.equals("")&&!ipString.equals(defaultIP)){
 			defaultIP=ipString;
+			System.out.println("defaultIP==="+defaultIP);
 		}
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost("http://"+defaultIP+":8080/niot/respCode.action");
 	    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(0);
         //nameValuePairs.add(new BasicNameValuePair("code", "00485123456789"));
 	    nameValuePairs.add(new BasicNameValuePair("code", code));
+	    System.out.println("输入的或扫描的编码为：\t"+code);
         try {
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		} catch (UnsupportedEncodingException e) {
@@ -81,5 +82,6 @@ public class SendHttpRequestService extends IntentService {
 		}
 		
 	}
+	
 
 }

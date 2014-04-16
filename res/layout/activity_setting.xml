@@ -51,7 +51,18 @@
         android:layout_marginBottom="10dp"
         android:adjustViewBounds="true" 
         android:text="@string/modify" />
-    
+     <Button
+        android:id="@+id/ipdelete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonUpdateServerAddress"
+       	android:background="#AA4630"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:adjustViewBounds="true" 
+        android:text="刪除" />
     
     <TextView
         android:id="@+id/textViewCopyright"

@@ -44,6 +44,7 @@ public class ShowDataActivity extends Activity {
 			int status = obj.getInt("status");
 
 			if (status == 0) {
+				
 				showInfo.setText("您输入的编码不属于后台数据库中的任何编码类型");
 			} else if (status == 1) {
 				JSONObject extraJson = new JSONObject(
