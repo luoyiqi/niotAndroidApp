@@ -9,10 +9,10 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Process;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +44,7 @@ public class ProgressBarActivity extends Activity {
 		setContentView(R.layout.activity_progress);
 		showInfoBar=(TextView)findViewById(R.id.showInfoBar);
 		bar=(ProgressBar)findViewById(R.id.bar);
+		
 	}
 
 	

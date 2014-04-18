@@ -5,5 +5,6 @@ public class ConstantUtil {
     public static String ipStr="";
     public static final int DEFAULT_WAITING_TIME = 30000;
     public static final String DEFAULT_SERVER_ADDRESS = "10.0.2.2";
-
+    public static final String DATABASENAME="ipdb";
+    public static final String IP_TABALE="IP_CONFIGER";
 }
